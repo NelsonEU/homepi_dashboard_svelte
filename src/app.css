@@ -1,0 +1,76 @@
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: linear-gradient(115deg,
+      #1e293b 0%,
+      #0f172a 40%,
+      #0a1320 100%);
+  color: #e5e7eb;
+}
+
+body {
+  margin: 0;
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 0.35rem 0;
+  letter-spacing: 0.02em;
+}
+
+.subtitle {
+  color: #9ca3af;
+  margin-bottom: 1.8rem;
+  font-size: 0.9rem;
+}
+
+.section-title {
+  margin: 1.75rem 0 0.9rem;
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9ca3af;
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0 0 0.9rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #e5e7eb;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.3rem;
+  margin-bottom: 1.5rem;
+  align-items: stretch;
+}
+
+.text-muted {
+  color: #6b7280;
+  font-size: 0.8rem;
+  margin-top: 0.4rem;
+}
+
+.footer {
+  margin-top: 1.75rem;
+  font-size: 0.75rem;
+  color: #4b5563;
+}
