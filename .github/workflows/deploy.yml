@@ -1,0 +1,42 @@
+name: Build & Deploy Dashboard Frontend (Pi Runner)
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'src/**'
+      - 'static/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'svelte.config.js'
+      - 'vite.config.*'
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Deploy build to /home/arnaud/dashboard_api/public
+        run: |
+          rm -rf /home/arnaud/dashboard_api/public
+          mkdir -p /home/arnaud/dashboard_api/public
+          cp -r build/* /home/arnaud/dashboard_api/public/
+
+      - name: Restart dashboard backend
+        run: sudo systemctl restart dashboard.service

@@ -1,6 +1,6 @@
 // DO NOT PUSH THAT
 const USER = "admin";
-const PASS = "ajax-rubs-shut-warms";
+const PASS = "ajax-rubs-shut-warms"; // Thils will need rotation
 const TOKEN = btoa(`${USER}:${PASS}`);
 
 const headers = {

@@ -21,3 +21,9 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Static builds
+build
+
+github_actions_homepi
+github_actions_homepi.pub

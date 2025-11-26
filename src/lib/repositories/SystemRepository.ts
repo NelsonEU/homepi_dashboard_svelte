@@ -1,7 +1,7 @@
 import { get } from "$lib/utils/seek";
 
 // TODO Arnaud: make host an env or process variable
-const HOST = "http://localhost:8000";
+const HOST = "https://dashboard.sonnel.eu"  //'http://localhost:8000';
 const BASE_URL = `${HOST}/api/system`;
 
 export async function getCPUInfo(): Promise<Cpu> {

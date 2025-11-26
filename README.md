@@ -1,38 +1,34 @@
-# sv
+# 🏠 HomePi Dashboard
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A lightweight monitoring and control dashboard for my Raspberry Pi 5 and Minecraft server.
+Built with **SvelteKit**, **FastAPI**, and **systemd**.
 
-## Creating a project
+## ⭐️ Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+### 🔧 *System Monitoring*
+- CPU temperature & usage  
+- RAM and disk usage  
+- Auto-refresh every 5 seconds  
 
-```sh
-# create a new project in the current directory
-npx sv create
+### 🟩 *Minecraft Management*
+- Start / Stop / Restart the server (via systemd)  
+- Live server status (online/offline, latency, players, version)  
+- Activity snapshot (CPU/RAM/mood)  
+- Log tailing (polling-based with auto-scroll)
 
-# create a new project in my-app
-npx sv create my-app
-```
+## 🚀 Build & Deployment
 
-## Developing
+The dashboard is deployed automatically to the Raspberry Pi using a **self-hosted GitHub Actions runner**.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Pipeline:
+1. Any push to `master` triggers a build (`npm ci && npm run build`)
+2. The runner copies the generated SvelteKit `build/` folder into the backend at: `public/`
+3. The backend systemd service is restarted
 
-```sh
-npm run dev
+The backend repository lives here:  
+➡️ **https://github.com/NelsonEU/homepi_dashboard_api**
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+## 📸 Screenshot
 
-## Building
+![screenshot](static/screenshot.png)
 
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
