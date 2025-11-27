@@ -11,6 +11,7 @@ on:
       - 'package-lock.json'
       - 'svelte.config.js'
       - 'vite.config.*'
+      - '.github/workflows/deploy.yml'
 
 jobs:
   build-and-deploy:
@@ -20,7 +21,7 @@ jobs:
         working-directory: /home/arnaud/dashboard_svelte
 
     steps:
-      - name: Sync frontend repo on Pi
+      - name: Sync frontend repo on the Pi
         run: |
           git fetch origin
           git reset --hard origin/master
@@ -43,5 +44,5 @@ jobs:
           mkdir -p /home/arnaud/dashboard_api/public
           cp -r build/* /home/arnaud/dashboard_api/public/
 
-      - name: Restart dashboard backend
+      - name: Restart backend service
         run: sudo systemctl restart dashboard.service
