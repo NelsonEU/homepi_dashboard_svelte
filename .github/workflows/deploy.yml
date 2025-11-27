@@ -17,7 +17,7 @@ jobs:
   build-and-deploy:
     runs-on: self-hosted
     env:
-      DASHBOARD_ENV_PATH: /home/arnaud/dashboard_api/dashboard.env # Env file path
+      DASHBOARD_ENV_PATH: /home/arnaud/dashboard_api/dashboard.env
 
     steps:
       - name: Load shared env vars from Pi
@@ -26,7 +26,10 @@ jobs:
           source "$DASHBOARD_ENV_PATH"
           set +a
 
-          # Expose only what frontend needs (no secrets)
+          # Expose backend-style vars for later steps
+          env | grep -E '^DASHBOARD_' >> "$GITHUB_ENV"
+
+          # Expose only the non-secret Vite var
           echo "VITE_DASHBOARD_API_URL=$DASHBOARD_API_URL" >> "$GITHUB_ENV"
 
       - name: Sync frontend repo on the Pi
