@@ -15,10 +15,15 @@ on:
 jobs:
   build-and-deploy:
     runs-on: self-hosted
+    defaults:
+      run:
+        working-directory: /home/arnaud/dashboard_svelte
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Sync frontend repo on Pi
+        run: |
+          git fetch origin
+          git reset --hard origin/master
 
       - name: Use Node.js
         uses: actions/setup-node@v4
@@ -32,7 +37,7 @@ jobs:
       - name: Build frontend
         run: npm run build
 
-      - name: Deploy build to /home/arnaud/dashboard_api/public
+      - name: Deploy build to backend public dir
         run: |
           rm -rf /home/arnaud/dashboard_api/public
           mkdir -p /home/arnaud/dashboard_api/public
