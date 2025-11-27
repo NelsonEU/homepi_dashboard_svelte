@@ -26,7 +26,7 @@ Pipeline:
 3. The backend systemd service is restarted
 
 The backend repository lives here:  
-➡️ **https://github.com/NelsonEU/homepi_dashboard_api**
+➡️ **https://github.com/NelsonEU/homepi_dashboard**
 
 ## Screenshot
 
