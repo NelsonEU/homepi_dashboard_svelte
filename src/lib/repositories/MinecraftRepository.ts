@@ -2,7 +2,7 @@ import { RESTART_ACTION_NAME, START_ACTION_NAME, STOP_ACTION_NAME, type Minecraf
 import { get, post } from '$lib/utils/seek';
 
 // TODO Arnaud: make host an env or process variable
-const HOST = 'http://localhost:8000';
+const HOST = "https://dashboard.sonnel.eu"  //'http://localhost:8000';
 const BASE_URL = `${HOST}/api/minecraft`;
 
 // ---- GET helpers ----

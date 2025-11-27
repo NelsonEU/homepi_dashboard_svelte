@@ -1,4 +1,4 @@
-name: Build & Deploy Dashboard Frontend
+name: Build & Deploy Dashboard Frontend (Pi Runner)
 
 on:
   push:
@@ -14,7 +14,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout repository
@@ -32,31 +32,11 @@ jobs:
       - name: Build frontend
         run: npm run build
 
-      # ---------- SSH setup ----------
-
-      - name: Configure SSH
+      - name: Deploy build to /home/arnaud/dashboard_api/public
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.PI_SSH_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          cat >> ~/.ssh/config <<EOF
-          Host homepi
-            HostName ${{ secrets.PI_HOST }}
-            User ${{ secrets.PI_USER }}
-            Port ${{ secrets.PI_PORT }}
-            IdentityFile ~/.ssh/id_ed25519
-            StrictHostKeyChecking no
-          EOF
-
-      # ---------- Deploy build/ to Pi ----------
-
-      - name: Sync build/ -> ${{ secrets.PI_BUILD_DESTINATION }}
-        run: |
-          rsync -az --delete \
-            build/ \
-            homepi:${{ secrets.PI_BUILD_DESTINATION }}
-
-      # ---------- Restart backend ----------
+          rm -rf /home/arnaud/dashboard_api/public
+          mkdir -p /home/arnaud/dashboard_api/public
+          cp -r build/* /home/arnaud/dashboard_api/public/
 
       - name: Restart dashboard backend
-        run: ssh homepi 'sudo systemctl restart ${{ secrets.PI_DASHBOARD_SERVICE }}'
+        run: sudo systemctl restart dashboard.service
