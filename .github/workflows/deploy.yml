@@ -25,10 +25,14 @@ jobs:
           set -a
           source "$DASHBOARD_ENV_PATH"
           set +a
-          # expose all DASHBOARD_* vars
+
+          # Expose backend-style vars
           env | grep -E '^DASHBOARD_' >> "$GITHUB_ENV"
-          # Vite build-time env (for later use in Svelte)
+
+          # Expose Vite vars
           echo "VITE_DASHBOARD_API_URL=$DASHBOARD_API_URL" >> "$GITHUB_ENV"
+          echo "VITE_DASHBOARD_USER=$DASHBOARD_USER" >> "$GITHUB_ENV"
+          echo "VITE_DASHBOARD_PASSWORD=$DASHBOARD_PASSWORD" >> "$GITHUB_ENV"
 
       - name: Sync frontend repo on the Pi
         run: |
