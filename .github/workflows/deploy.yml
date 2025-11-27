@@ -16,13 +16,23 @@ on:
 jobs:
   build-and-deploy:
     runs-on: self-hosted
-    defaults:
-      run:
-        working-directory: /home/arnaud/dashboard_svelte
+    env:
+      DASHBOARD_ENV_PATH: /home/arnaud/dashboard_api/dashboard.env # Env file path
 
     steps:
+      - name: Load shared env vars from Pi
+        run: |
+          set -a
+          source "$DASHBOARD_ENV_PATH"
+          set +a
+          # expose all DASHBOARD_* vars
+          env | grep -E '^DASHBOARD_' >> "$GITHUB_ENV"
+          # Vite build-time env (for later use in Svelte)
+          echo "VITE_DASHBOARD_API_URL=$DASHBOARD_API_URL" >> "$GITHUB_ENV"
+
       - name: Sync frontend repo on the Pi
         run: |
+          cd "$DASHBOARD_FRONT_ROOT_DIR"
           git fetch origin
           git reset --hard origin/master
 
@@ -33,16 +43,21 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          cd "$DASHBOARD_FRONT_ROOT_DIR"
+          npm ci
 
       - name: Build frontend
-        run: npm run build
+        run: |
+          cd "$DASHBOARD_FRONT_ROOT_DIR"
+          npm run build
 
       - name: Deploy build to backend public dir
         run: |
-          rm -rf /home/arnaud/dashboard_api/public
-          mkdir -p /home/arnaud/dashboard_api/public
-          cp -r build/* /home/arnaud/dashboard_api/public/
+          rm -rf "$DASHBOARD_API_ROOT_DIR/public"
+          mkdir -p "$DASHBOARD_API_ROOT_DIR/public"
+          cp -r "$DASHBOARD_FRONT_ROOT_DIR/build/"* "$DASHBOARD_API_ROOT_DIR/public/"
 
       - name: Restart backend service
-        run: sudo systemctl restart dashboard.service
+        run: |
+          sudo systemctl restart "$DASHBOARD_API_SERVICE"
