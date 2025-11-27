@@ -26,13 +26,8 @@ jobs:
           source "$DASHBOARD_ENV_PATH"
           set +a
 
-          # Expose backend-style vars
-          env | grep -E '^DASHBOARD_' >> "$GITHUB_ENV"
-
-          # Expose Vite vars
+          # Expose only what frontend needs (no secrets)
           echo "VITE_DASHBOARD_API_URL=$DASHBOARD_API_URL" >> "$GITHUB_ENV"
-          echo "VITE_DASHBOARD_USER=$DASHBOARD_USER" >> "$GITHUB_ENV"
-          echo "VITE_DASHBOARD_PASSWORD=$DASHBOARD_PASSWORD" >> "$GITHUB_ENV"
 
       - name: Sync frontend repo on the Pi
         run: |
