@@ -1,18 +1,9 @@
-const USERNAME = import.meta.env.VITE_DASHBOARD_USER;
-const PASSWORD = import.meta.env.VITE_DASHBOARD_PASSWORD;
 const API_HOST = import.meta.env.VITE_DASHBOARD_API_URL;
-const TOKEN = btoa(`${USERNAME}:${PASSWORD}`);
-
-const headers = {
-  Authorization: `Basic ${TOKEN}`,
-  'Content-Type': 'application/json'
-};
 
 export async function get<T>(url: string): Promise<T> {
   const apiUrl = _getApiUrl(url);
   const res = await fetch(apiUrl, {
     method: "GET",
-    headers: headers,
     credentials: "include"
   });
 
@@ -28,7 +19,6 @@ export async function post<T>(url: string): Promise<T> {
   const apiUrl = _getApiUrl(url);
   const res = await fetch(apiUrl, {
     method: "POST",
-    headers,
     credentials: "include"
   });
 
