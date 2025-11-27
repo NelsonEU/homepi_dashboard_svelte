@@ -23,7 +23,7 @@ The dashboard is deployed automatically to the Raspberry Pi using a **self-hoste
 Pipeline:
 1. Any push to `master` triggers a build (`npm ci && npm run build`)
 2. The runner copies the generated SvelteKit `build/` folder into the backend at: `public/`
-3. The backend systemd service is restarted
+3. The backend service is restarted
 
 The backend repository lives here:  
 ➡️ **https://github.com/NelsonEU/homepi_dashboard**
