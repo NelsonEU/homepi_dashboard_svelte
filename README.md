@@ -5,7 +5,7 @@ Built with **SvelteKit**, **FastAPI**, and **systemd**.
 
 ## Features
 
-### 🔧 *System Monitoring*
+### *System Monitoring*
 - CPU temperature & usage  
 - RAM and disk usage  
 - Auto-refresh every 5 seconds  
