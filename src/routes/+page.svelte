@@ -5,7 +5,7 @@
 </script>
 
 <div class="container">
-	<h1>HomePi Dashboard</h1>
+	<h1>HomePi Dashboard 🤖</h1>
 	<div class="subtitle">System & Minecraft overview – refreshed every 5 seconds.</div>
 
 	<SystemSection />
