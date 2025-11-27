@@ -41,5 +41,5 @@ export async function post<T>(url: string): Promise<T> {
 }
 
 function _getApiUrl(url: string): string {
-  return `${API_HOST}/${url}`;
+  return `${API_HOST}/api/${url}`;
 }
