@@ -5,7 +5,7 @@
 	import StatusBadge from '$lib/components/StatusBadge.svelte';
 
 	import { getCPUInfo, getMemoryInfo, type Cpu, type Memory } from '$lib/repositories/SystemRepository';
-	import { onDestroy, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 
 	let cpu = null as Cpu | null;
 	let memory = null as Memory | null;
