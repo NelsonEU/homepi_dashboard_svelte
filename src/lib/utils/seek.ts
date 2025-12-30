@@ -9,7 +9,6 @@ export async function get<T>(url: string): Promise<T> {
 
   if (!res.ok) {
     console.log(`System API error ${res.status}: ${res.statusText}`)
-    alert("Error!");
   }
 
   return (await res.json()) as T;
@@ -24,7 +23,6 @@ export async function post<T>(url: string): Promise<T> {
 
   if (!res.ok) {
     console.log(`System API error ${res.status}: ${res.statusText}`)
-    alert("Error!");
   }
 
   return (await res.json()) as T;

@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
+	import { onMount } from 'svelte';
+	import PinggySection from '$lib/sections/PinggySection.svelte';
 	import Card from '$lib/components/Card.svelte';
 	import MetricRow from '$lib/components/MetricRow.svelte';
 	import PillStatus from '$lib/components/PillStatus.svelte';
@@ -174,6 +175,7 @@
 			{/if}
 		</div>
 	</Card>
+	<PinggySection/>
 </div>
 
 <style>

@@ -6,12 +6,26 @@
 		variant: ButtonVariant;
 		disabled?: boolean;
 		onClick?: (event: MouseEvent) => void;
+		style?: string;
+		class?: string;
 	};
 
-	let { label, variant, disabled = false, onClick }: Props = $props();
+	let {
+		label,
+		variant,
+		disabled = false,
+		onClick,
+		style = '',
+		class: extraClass = ''
+	}: Props = $props();
 </script>
 
-<button class={variant} disabled={disabled} onclick={onClick}>
+<button
+	class={`${variant} ${extraClass}`}
+	style={style}
+	disabled={disabled}
+	onclick={onClick}
+>
 	{label}
 </button>
 
